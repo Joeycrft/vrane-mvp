@@ -48,7 +48,7 @@ function ReadingAssistant() {
         setLoading(true);
         setBreakdown('');
         try {
-          const res = await fetch('/api/highlight', {
+          const res = await fetch('https://vrane-mvp.onrender.com/api/highlight', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
