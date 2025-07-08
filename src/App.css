@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Pacifico&display=swap');
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
+}
+
+/* Vrane Landing Styles */
+.vrane-landing-bg {
+  min-height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, #fff8ed 0%, #fff 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.vrane-landing-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  border-radius: 24px;
+  box-shadow: 0 4px 32px 0 rgba(0,0,0,0.07);
+  background: rgba(255,255,255,0.95);
+}
+
+.vrane-logo {
+  width: 170px;
+  height: auto;
+  max-height: 220px;
+  margin-bottom: 0.3rem;
+  object-fit: contain;
+}
+
+.vrane-title {
+  font-size: 3rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: #e74c3c;
+  margin: 0;
+  font-family: 'Montserrat', Arial, sans-serif;
+}
+
+.vrane-tagline {
+  font-size: 1.05rem;
+  margin-top: 0.5rem;
+  color: #e67e22;
+  font-family: 'Pacifico', cursive;
+  font-style: normal;
+  letter-spacing: 0.04em;
+}
+
+.vrane-btn {
+  margin-top: 2rem;
+  padding: 0.75rem 2.2rem;
+  font-size: 1.1rem;
+  font-family: 'Montserrat', Arial, sans-serif;
+  font-weight: 700;
+  color: #fff;
+  background: linear-gradient(90deg, #e67e22 0%, #e74c3c 100%);
+  border: none;
+  border-radius: 2rem;
+  box-shadow: 0 2px 12px 0 rgba(231, 76, 60, 0.08);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+.vrane-btn:hover {
+  background: linear-gradient(90deg, #e74c3c 0%, #e67e22 100%);
+  transform: translateY(-2px) scale(1.04);
+}
+
+.vrane-fixed-logo {
+  position: fixed;
+  bottom: 0px;
+  right: 10px;
+  width: 100px;
+  height: auto;
+  z-index: 1000;
+  opacity: 0.92;
+}
+
+.vrane-gradient-btn:hover {
+  background: linear-gradient(270deg, #c95c00 0%, #e67e22 100%) !important;
+}
