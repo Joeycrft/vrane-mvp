@@ -87,7 +87,7 @@ export default function DemoPassageReader() {
       if (['breakdown', 'both'].includes(mode)) {
         try {
           const comprehensionLevel = localStorage.getItem('vraneLevel') || 'middle school';
-          const res = await fetch('/api/highlight', {
+          const res = await fetch('https://vrane-mvp.onrender.com/api/highlight', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
@@ -113,7 +113,7 @@ export default function DemoPassageReader() {
         try {
           const comprehensionLevel = localStorage.getItem('vraneLevel') || 'middle school';
           console.log("Fetching question for:", text);
-          const resQ = await fetch('/api/highlight', {
+          const resQ = await fetch('https://vrane-mvp.onrender.com/api/highlight', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({
