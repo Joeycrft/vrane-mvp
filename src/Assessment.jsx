@@ -269,9 +269,9 @@ function Assessment() {
               transition: 'background 0.3s',
               fontFamily: "Nunito"
             }}
-            onClick={() => navigate('/reading')}
+            onClick={() => window.location.href = '/welcome'}
           >
-            Go to Reading Assistant
+            Get Started
           </button>
         </div>
       </div>
