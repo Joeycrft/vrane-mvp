@@ -104,7 +104,7 @@ function Assessment() {
       setStep(step + 1);
     } else {
       setProcessing(true);
-      fetch('http://localhost:5001/api/assessment-result', {
+      fetch('https://vrane-mvp.onrender.com/api/assessment-result', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -144,8 +144,21 @@ function Assessment() {
             setStep(step + 1);
           }
         })
-        .catch((err) => {
+        .catch(async (err) => {
           console.error('Error in assessment-result fetch:', err);
+          // Even if API fails, mark assessment as completed to prevent infinite loop
+          try {
+            const userId = auth.currentUser ? auth.currentUser.uid : null;
+            if (userId) {
+              await setDoc(doc(db, 'users', userId), {
+                assessmentCompleted: true,
+                readingLevel: 'intermediate', // fallback level
+                assessmentCompletedAt: serverTimestamp(),
+              }, { merge: true });
+            }
+          } catch (e) {
+            console.error("Error saving assessment completion:", e);
+          }
           setResult('done');
           setProcessing(false);
           setStep(step + 1);
