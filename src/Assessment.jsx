@@ -258,7 +258,10 @@ function Assessment() {
               transition: 'background 0.3s',
               fontFamily: "Nunito"
             }}
-            onClick={() => window.location.reload()}
+            onClick={() => {
+              console.log('Retake Assessment button clicked');
+              window.location.href = '/assessment';
+            }}
           >
             Retake Assessment
           </button>
@@ -281,7 +284,8 @@ function Assessment() {
             }}
             onClick={() => {
               console.log('Get Started button clicked');
-              window.location.reload();
+              // Force a hard navigation to welcome page
+              window.location.href = '/welcome';
             }}
           >
             Get Started
