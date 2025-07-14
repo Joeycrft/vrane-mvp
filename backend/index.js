@@ -46,6 +46,65 @@ app.post('/api/highlight', async (req, res) => {
   }
 });
 
+app.post('/api/assessment-result', async (req, res) => {
+  const { answers } = req.body;
+
+  if (!OPENAI_API_KEY) {
+    return res.status(500).json({ analysis: 'OpenAI API key not set. Please add OPENAI_API_KEY to your .env file.' });
+  }
+
+  try {
+    // Create a prompt to analyze the assessment answers
+    const prompt = `Analyze these reading comprehension assessment answers and determine the student's reading level. 
+    
+Assessment Questions and Answers:
+${answers.map((q, i) => `${i + 1}. ${q.question}\nAnswer: ${q.answer}`).join('\n\n')}
+
+Based on the quality, depth, and accuracy of these answers, determine the student's reading comprehension level. 
+Respond with only one of these levels: "beginner", "intermediate", or "advanced".
+
+Consider:
+- Vocabulary understanding
+- Comprehension of main ideas
+- Ability to make inferences
+- Critical thinking skills
+- Writing quality for open-ended questions
+
+Respond with only the level:`;
+
+    const completionRes = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${OPENAI_API_KEY}`
+      },
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: [
+          { role: 'system', content: 'You are an educational assessment expert analyzing reading comprehension levels.' },
+          { role: 'user', content: prompt }
+        ],
+        max_tokens: 50,
+        temperature: 0.3
+      })
+    });
+    
+    const completionData = await completionRes.json();
+    const analysis = completionData.choices && completionData.choices[0] && completionData.choices[0].message && completionData.choices[0].message.content
+      ? completionData.choices[0].message.content.trim().toLowerCase()
+      : 'intermediate';
+    
+    // Ensure the response is one of the valid levels
+    const validLevels = ['beginner', 'intermediate', 'advanced'];
+    const finalLevel = validLevels.includes(analysis) ? analysis : 'intermediate';
+    
+    res.json({ analysis: finalLevel });
+  } catch (err) {
+    console.error('Assessment API error:', err);
+    res.status(500).json({ analysis: 'intermediate' });
+  }
+});
+
 app.listen(PORT, () => {
   console.log(`Backend running on port ${PORT}`);
   if (!OPENAI_API_KEY) {

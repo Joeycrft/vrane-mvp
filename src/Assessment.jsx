@@ -115,7 +115,9 @@ function Assessment() {
         }),
       })
         .then(async data => {
+          console.log('Assessment API response:', data);
           const res = await data.json();
+          console.log('Assessment result:', res);
           localStorage.setItem('vraneLevel', res.analysis);
           try {
             await addDoc(collection(db, "assessments"), {
@@ -127,6 +129,8 @@ function Assessment() {
               readingLevel: res.analysis,
               created: Timestamp.now()
             });
+            console.log('Assessment saved to Firestore');
+            
             // Save assessment completion to users/{uid}
             const userId = auth.currentUser ? auth.currentUser.uid : null;
             if (userId) {
@@ -135,6 +139,7 @@ function Assessment() {
                 readingLevel: res.analysis,
                 assessmentCompletedAt: serverTimestamp(),
               }, { merge: true });
+              console.log('User assessment status updated in Firebase');
             }
           } catch (e) {
             console.error("Error saving assessment to Firestore:", e);
@@ -155,6 +160,7 @@ function Assessment() {
                 readingLevel: 'intermediate', // fallback level
                 assessmentCompletedAt: serverTimestamp(),
               }, { merge: true });
+              console.log('Assessment marked as completed (fallback)');
             }
           } catch (e) {
             console.error("Error saving assessment completion:", e);
