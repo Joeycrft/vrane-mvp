@@ -248,7 +248,7 @@ function Assessment() {
               transition: 'background 0.3s',
               fontFamily: "Nunito"
             }}
-            onClick={handleRetake}
+            onClick={() => window.location.reload()}
           >
             Retake Assessment
           </button>
@@ -269,7 +269,7 @@ function Assessment() {
               transition: 'background 0.3s',
               fontFamily: "Nunito"
             }}
-            onClick={() => window.location.href = '/welcome'}
+            onClick={() => window.location.reload()}
           >
             Get Started
           </button>
