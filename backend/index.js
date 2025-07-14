@@ -61,7 +61,7 @@ Assessment Questions and Answers:
 ${answers.map((q, i) => `${i + 1}. ${q.question}\nAnswer: ${q.answer}`).join('\n\n')}
 
 Based on the quality, depth, and accuracy of these answers, determine the student's reading comprehension level. 
-Respond with only one of these levels: "beginner", "intermediate", or "advanced".
+Respond with only a grade level between 1st and 12th grade (e.g., "3rd grade", "7th grade", "11th grade").
 
 Consider:
 - Vocabulary understanding
@@ -70,7 +70,7 @@ Consider:
 - Critical thinking skills
 - Writing quality for open-ended questions
 
-Respond with only the level:`;
+Respond with only the grade level:`;
 
     const completionRes = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
@@ -91,17 +91,17 @@ Respond with only the level:`;
     
     const completionData = await completionRes.json();
     const analysis = completionData.choices && completionData.choices[0] && completionData.choices[0].message && completionData.choices[0].message.content
-      ? completionData.choices[0].message.content.trim().toLowerCase()
-      : 'intermediate';
+      ? completionData.choices[0].message.content.trim()
+      : '6th grade';
     
-    // Ensure the response is one of the valid levels
-    const validLevels = ['beginner', 'intermediate', 'advanced'];
-    const finalLevel = validLevels.includes(analysis) ? analysis : 'intermediate';
+    // Ensure the response is a valid grade level
+    const gradeMatch = analysis.match(/(\d{1,2})(st|nd|rd|th)\s*grade/i);
+    const finalLevel = gradeMatch ? `${gradeMatch[1]}${gradeMatch[2]} grade` : '6th grade';
     
     res.json({ analysis: finalLevel });
   } catch (err) {
     console.error('Assessment API error:', err);
-    res.status(500).json({ analysis: 'intermediate' });
+    res.status(500).json({ analysis: '6th grade' });
   }
 });
 

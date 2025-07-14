@@ -162,11 +162,7 @@ function UserProfile({ onLogout, onRetake }) {
         <div style={{ fontFamily: 'Nunito', fontSize: '1.13rem', marginBottom: 24 }}>
           <strong>Comprehension Level:</strong> {(() => {
             if (!readingLevel) return 'Not set';
-            // Handle the new assessment format (beginner/intermediate/advanced)
-            if (readingLevel.toLowerCase() === 'beginner') return 'Beginner';
-            if (readingLevel.toLowerCase() === 'intermediate') return 'Intermediate';
-            if (readingLevel.toLowerCase() === 'advanced') return 'Advanced';
-            // Handle old grade format if it exists
+            // Handle grade level format
             const match = readingLevel.match(/\d{1,2}(st|nd|rd|th) grade/i);
             return match ? match[0][0].toUpperCase() + match[0].slice(1) : readingLevel;
           })()}

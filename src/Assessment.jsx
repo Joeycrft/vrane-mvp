@@ -160,7 +160,7 @@ function Assessment() {
             if (userId) {
               await setDoc(doc(db, 'users', userId), {
                 assessmentCompleted: true,
-                readingLevel: 'intermediate', // fallback level
+                readingLevel: '6th grade', // fallback level
                 assessmentCompletedAt: serverTimestamp(),
               }, { merge: true });
               console.log('Assessment marked as completed (fallback)');
