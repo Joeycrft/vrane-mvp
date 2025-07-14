@@ -88,6 +88,7 @@ const questions = [
 ];
 
 function Assessment() {
+  console.log('Assessment component loaded');
   const [step, setStep] = useState(0);
   const [answers, setAnswers] = useState([]);
   const [input, setInput] = useState('');
@@ -98,11 +99,13 @@ function Assessment() {
   const current = questions[step];
 
   const handleNext = () => {
+    console.log('handleNext called, step:', step, 'total questions:', questions.length);
     setAnswers([...answers, input]);
     setInput('');
     if (step < questions.length - 1) {
       setStep(step + 1);
     } else {
+      console.log('Assessment complete! Starting API call...');
       setProcessing(true);
       fetch('https://vrane-mvp.onrender.com/api/assessment-result', {
         method: 'POST',
@@ -210,6 +213,7 @@ function Assessment() {
   }
 
   if (step >= questions.length) {
+    console.log('Showing assessment completion screen');
     return (
       <div className="vrane-landing-bg" style={{ minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #fff8ed 0%, #ffe0b2 100%)' }}>
         <div style={{ width: '100%', maxWidth: 440, background: '#fff', borderRadius: 18, boxShadow: '0 4px 24px rgba(230, 103, 34, 0.10)', padding: '2.5rem 2.2rem 2rem 2.2rem', textAlign: 'center', position: 'relative' }}>
@@ -275,7 +279,10 @@ function Assessment() {
               transition: 'background 0.3s',
               fontFamily: "Nunito"
             }}
-            onClick={() => window.location.reload()}
+            onClick={() => {
+              console.log('Get Started button clicked');
+              window.location.reload();
+            }}
           >
             Get Started
           </button>
