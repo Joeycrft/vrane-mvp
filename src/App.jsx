@@ -219,22 +219,40 @@ function App() {
           element={
             userRole === 'teacher'
               ? <Navigate to="/dashboard" />
-              : <Navigate to="/welcome" />
+              : assessmentDone
+                ? <Navigate to="/welcome" />
+                : <Navigate to="/assessment" />
           }
         />
-        <Route path="/welcome" element={<WelcomeBack />} />
+        <Route 
+          path="/welcome" 
+          element={
+            assessmentDone 
+              ? <WelcomeBack /> 
+              : <Navigate to="/assessment" />
+          } 
+        />
         <Route path="/assessment" element={<Assessment />} />
-        <Route path="/reading" element={<ReadingAssistant />} />
+        <Route 
+          path="/reading" 
+          element={
+            assessmentDone 
+              ? <ReadingAssistant /> 
+              : <Navigate to="/assessment" />
+          } 
+        />
         <Route
           path="/profile"
           element={
-            <UserProfile
-              onLogout={async () => {
-                await auth.signOut();
-                window.location.reload();
-              }}
-              onRetake={() => window.location.reload()}
-            />
+            assessmentDone 
+              ? <UserProfile
+                  onLogout={async () => {
+                    await auth.signOut();
+                    window.location.reload();
+                  }}
+                  onRetake={() => window.location.reload()}
+                />
+              : <Navigate to="/assessment" />
           }
         />
         <Route
