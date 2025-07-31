@@ -300,6 +300,7 @@ export default function DemoPassageReader() {
                 boxShadow: '0 2px 8px rgba(230,103,34,0.07)'
               }}
               onMouseUp={handleMouseUp}
+              onTouchEnd={handleMouseUp}
             >
               {DEMO_PASSAGE}
             </div>
