@@ -53,7 +53,7 @@ Below is a **plain-text architecture diagram** for how the system works:
 
 ```
 
-Data & future components:
+## Data & future components:
 
 PostgreSQL / other DB (later):
 
@@ -67,9 +67,9 @@ Analytics (later):
 
 Which phrases are hardest, which students need extra support.
 
-🛠️ Tech Stack (Planned / Current)
+##  Tech Stack (Planned / Current)
 
-Frontend:
+## Frontend:
 
 React (with Vite or Next.js)
 
@@ -77,7 +77,7 @@ TypeScript (optional but recommended)
 
 Tailwind CSS or simple CSS for styling
 
-Backend API:
+## Backend API:
 
 Node.js (18+)
 
@@ -85,17 +85,17 @@ Express / Next.js API routes / Vercel Serverless Functions
 
 TypeScript (optional)
 
-AI / LLM:
+## AI / LLM:
 
-OpenAI API (e.g. gpt-4o-mini for explanations)
+OpenAI API (e.g. gpt-4o-mini for explanations) Price-wise best initially 
 
-Deployment (MVP):
+## Deployment (MVP):
 
 Frontend: Vercel
 
 Backend: Vercel functions / Render / Railway / similar
 
-Step by Step –
+## Step by Step – workflow
 
 Student opens the website and sees a reading passage.
 
@@ -107,10 +107,7 @@ The backend takes:
 
 the selected phrase,
 
-the full sentence/passage,
-
-the student grade level (if available),
-and builds a prompt for the OpenAI API.
+the full sentence/passage,the student grade level (if available),and builds a prompt for the OpenAI API.
 
 The OpenAI model returns a short, simple explanation.
 
